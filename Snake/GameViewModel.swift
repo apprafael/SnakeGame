@@ -31,7 +31,7 @@ class GameViewModel: ObservableObject {
     var speed = 1.0
     
     
-    init(viewHeight: Double, viewWidth: Double) {
+    init() {
         startGame()
     }
     
@@ -53,15 +53,19 @@ class GameViewModel: ObservableObject {
         matrix = [[SquareType]](repeating: [SquareType](repeating: .empty, count: 10), count: 10)
         foodPositon = (Int.random(in: 0..<matrix.count - 1), Int.random(in: 0..<matrix[0].count - 1))
         updateFoodPositon(columIndex: foodPositon.0, rowIndex: foodPositon.1)
-        startAutomaticMovements()
+        playGame()
     }
     
-    func startAutomaticMovements() {
+    func pauseGame() {
+        timer?.invalidate()
+    }
+    
+    func playGame() {
         timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: speed, target: self, selector: #selector(move), userInfo: nil, repeats: true)
     }
-    
-    func userMovment(direction: Directions) {
+
+    func userMovement(direction: Directions) {
         switch direction {
         case .right:
             if selectedDirection == .left && body.count > 1 {
@@ -85,7 +89,7 @@ class GameViewModel: ObservableObject {
         selectedDirection = direction
         
         move()
-        startAutomaticMovements()
+        playGame()
     }
     
     @objc func move() {

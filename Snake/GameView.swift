@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct GameView: View {
-    @StateObject var viewModel = GameViewModel(viewHeight: UIScreen.main.bounds.height,
-                                               viewWidth: UIScreen.main.bounds.width)
+    @StateObject var viewModel = GameViewModel()
     var body: some View {
         VStack(spacing: 60) {
             VStack(spacing: 0) {
@@ -45,7 +44,7 @@ struct GameView: View {
             
             VStack(spacing: 0) {
                 Button {
-                    viewModel.userMovment(direction: .up)
+                    viewModel.userMovement(direction: .up)
                 } label: {
                     Image(systemName: "arrowtriangle.up.fill")
                         .padding(.all, 20)
@@ -55,7 +54,7 @@ struct GameView: View {
                 
                 HStack(spacing: 70) {
                     Button {
-                        viewModel.userMovment(direction: .left)
+                        viewModel.userMovement(direction: .left)
                     } label: {
                         Image(systemName: "arrowtriangle.left.fill")
                             .padding(.all, 20)
@@ -64,7 +63,7 @@ struct GameView: View {
                     .buttonStyle(.borderedProminent)
                     
                     Button {
-                        viewModel.userMovment(direction: .right)
+                        viewModel.userMovement(direction: .right)
                     } label: {
                         Image(systemName: "arrowtriangle.right.fill")
                             .padding(.all, 20)
@@ -73,7 +72,7 @@ struct GameView: View {
                 }
                 
                 Button {
-                    viewModel.userMovment(direction: .down)
+                    viewModel.userMovement(direction: .down)
                 } label: {
                     Image(systemName: "arrowtriangle.down.fill")
                         .padding(.all, 20)
@@ -83,6 +82,12 @@ struct GameView: View {
             
         }
         .padding()
+        .onAppear {
+            viewModel.playGame()
+        }
+        .onDisappear {
+            viewModel.pauseGame()
+        }
     }
 }
 
