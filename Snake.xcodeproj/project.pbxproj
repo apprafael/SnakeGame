@@ -15,6 +15,8 @@
 		2686E61D2909C0EA008414D3 /* SnakeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2686E61C2909C0EA008414D3 /* SnakeUITests.swift */; };
 		2686E61F2909C0EA008414D3 /* SnakeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2686E61E2909C0EA008414D3 /* SnakeUITestsLaunchTests.swift */; };
 		2686E62C2909C139008414D3 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2686E62B2909C139008414D3 /* GameViewModel.swift */; };
+		26C0FF592A51B754000CF775 /* Directions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C0FF582A51B754000CF775 /* Directions.swift */; };
+		26C0FF5B2A51B775000CF775 /* SquareType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C0FF5A2A51B775000CF775 /* SquareType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		2686E61C2909C0EA008414D3 /* SnakeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeUITests.swift; sourceTree = "<group>"; };
 		2686E61E2909C0EA008414D3 /* SnakeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2686E62B2909C139008414D3 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		26C0FF582A51B754000CF775 /* Directions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directions.swift; sourceTree = "<group>"; };
+		26C0FF5A2A51B775000CF775 /* SquareType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 				2686E6012909C0E8008414D3 /* SnakeApp.swift */,
 				2686E6032909C0E8008414D3 /* GameView.swift */,
 				2686E62B2909C139008414D3 /* GameViewModel.swift */,
+				26C0FF582A51B754000CF775 /* Directions.swift */,
+				26C0FF5A2A51B775000CF775 /* SquareType.swift */,
 				2686E6052909C0EA008414D3 /* Assets.xcassets */,
 				2686E6072909C0EA008414D3 /* Preview Content */,
 			);
@@ -263,6 +269,8 @@
 				2686E62C2909C139008414D3 /* GameViewModel.swift in Sources */,
 				2686E6042909C0E8008414D3 /* GameView.swift in Sources */,
 				2686E6022909C0E8008414D3 /* SnakeApp.swift in Sources */,
+				26C0FF5B2A51B775000CF775 /* SquareType.swift in Sources */,
+				26C0FF592A51B754000CF775 /* Directions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

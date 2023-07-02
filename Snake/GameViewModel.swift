@@ -7,28 +7,16 @@
 
 import Foundation
 
-enum Directions {
-    case right
-    case left
-    case up
-    case down
-}
-
-enum SquareType {
-    case snake
-    case empty
-    case food
-}
-
 class GameViewModel: ObservableObject {
     @Published var matrix: [[SquareType]] = [[SquareType]](repeating: [SquareType](repeating: .empty, count: 10), count: 10)
-    var selectedDirection: Directions = .right
-    var headPositon = (1,1)
-    var foodPositon = (1,1)
-    var body = [(Int,Int)]()
-    var size = 1
-    var timer: Timer?
-    var speed = 1.0
+    
+    private var selectedDirection: Directions = .right
+    private var headPositon = (1,1)
+    private var foodPositon = (1,1)
+    private var body = [(Int,Int)]()
+    private var size = 1
+    private var timer: Timer?
+    private var speed = 1.0
     
     
     init() {
