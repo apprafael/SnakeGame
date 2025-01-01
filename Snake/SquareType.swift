@@ -11,4 +11,6 @@ enum SquareType {
     case snake
     case empty
     case food
+    case growthPotion
+    case speedPotion
 }

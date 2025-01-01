@@ -9,84 +9,142 @@ import SwiftUI
 
 struct GameView: View {
     @StateObject var viewModel = GameViewModel()
+
     var body: some View {
-        VStack(spacing: 60) {
-            VStack(spacing: 0) {
-                ForEach(viewModel.matrix, id: \.self) { row in
-                    HStack(spacing: 0) {
-                        ForEach(row, id: \.self) { square in
-                            switch square {
-                            case .snake:
-                                Rectangle()
-                                    .aspectRatio(1.0, contentMode: .fit)
-                                    .foregroundColor(Color("blue"))
-                                    .shadow(color: Color("blue"), radius: 5, x: 0, y: 0)
-                                    .border(.gray, width: 1)
-                            case .empty:
-                                Rectangle()
-                                    .aspectRatio(1.0, contentMode: .fit)
-                                    .foregroundColor(Color("white"))
-                            case .food:
-                                Rectangle()
-                                    .aspectRatio(1.0, contentMode: .fit)
-                                    .foregroundColor(Color("red"))
-                                    .shadow(color: Color("red"), radius: 5, x: 0, y: 0)
-                                    .border(.gray, width: 1)
-                            }
+        ZStack {
+
+            setContent()
+
+            if !viewModel.gameStarted {
+                Color.black.opacity(0.7)
+                    .ignoresSafeArea()
+
+                Button(action: {
+                    viewModel.startGame()
+                }, label: {
+                    Image("start")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 300)
+                })
+            }
+        }
+    }
+
+    private func setContent() -> some View {
+        ZStack {
+            Image("background")
+                .resizable()
+                .ignoresSafeArea()
+                .scaledToFill()
+                .overlay(Color.black.opacity(0.5))
+
+            VStack(spacing: 60) {
+                setGameGrid()
+                setDPad()
+            }
+            .padding()
+//            .onAppear {
+//                viewModel.playGame()
+//            }
+            .onDisappear {
+                viewModel.pauseGame()
+            }
+        }
+
+    }
+
+    private func setGameGrid() -> some View {
+        VStack(spacing: 0) {
+            ForEach(viewModel.matrix, id: \.self) { row in
+                HStack(spacing: 0) {
+                    ForEach(row, id: \.self) { square in
+                        switch square {
+                        case .snake:
+                            Image("snake_piece")
+                                .resizable()
+                                .aspectRatio(1.0, contentMode: .fit)
+                                .shadow(color: .blue, radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+                        case .empty:
+                            Rectangle()
+                                .aspectRatio(1.0, contentMode: .fit)
+                                .foregroundColor(.clear)
+                        case .food:
+                            Image("food")
+                                .resizable()
+                                .aspectRatio(1.0, contentMode: .fit)
+                                .shadow(color: .blue, radius: 10)
+                        case .growthPotion:
+                            Image("red-potion")
+                                .resizable()
+                                .aspectRatio(1.0, contentMode: .fit)
+                                .shadow(color: .red, radius: 10)
+                        case .speedPotion:
+                            Image("green-potion")
+                                .resizable()
+                                .aspectRatio(1.0, contentMode: .fit)
+                                .shadow(color: .green, radius: 10)
                         }
                     }
                 }
+                .foregroundColor(.blue.opacity(0.5))
             }
-            .border(Color("red"), width: 10)
+        }
+        .clipped()
+        .background {
+            ZStack {
+                Image("grid_background")
+                    .resizable()
+                    .overlay(Color.black.opacity(0.5))
+            }
             .cornerRadius(10)
-            .clipped()
-            .shadow(color: Color("red"), radius: 10, x: 0, y: 0)
-            
-            VStack(spacing: 0) {
-                Button {
-                    viewModel.userMovement(direction: .up)
-                } label: {
-                    Image(systemName: "arrowtriangle.up.fill")
-                        .padding(.all, 20)
-                        
-                }
-                .buttonStyle(.borderedProminent)
-                
-                HStack(spacing: 70) {
-                    Button {
-                        viewModel.userMovement(direction: .left)
-                    } label: {
-                        Image(systemName: "arrowtriangle.left.fill")
-                            .padding(.all, 20)
-                        
-                    }
-                    .buttonStyle(.borderedProminent)
-                    
-                    Button {
-                        viewModel.userMovement(direction: .right)
-                    } label: {
-                        Image(systemName: "arrowtriangle.right.fill")
-                            .padding(.all, 20)
-                    }
-                    .buttonStyle(.borderedProminent)
-                }
-                
-                Button {
-                    viewModel.userMovement(direction: .down)
-                } label: {
-                    Image(systemName: "arrowtriangle.down.fill")
-                        .padding(.all, 20)
-                }
-                .buttonStyle(.borderedProminent)
+            .shadow(color: .blue, radius: 10)
+        }
+    }
+
+    private func setDPad() -> some View {
+        VStack(spacing: 0) {
+            Button {
+                viewModel.userMovement(direction: .up)
+            } label: {
+                Image("dPadButton")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100)
+                    .rotationEffect(.degrees(-90))
             }
-            
-        }
-        .padding()
-        .onAppear {
-            viewModel.playGame()
-        }
-        .onDisappear {
-            viewModel.pauseGame()
+
+            HStack(spacing: 70) {
+                Button {
+                    viewModel.userMovement(direction: .left)
+                } label: {
+                    Image("dPadButton")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100)
+                        .rotationEffect(.degrees(-180))
+
+                }
+
+                Button {
+                    viewModel.userMovement(direction: .right)
+                } label: {
+                    Image("dPadButton")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100)
+                }
+            }
+
+            Button {
+                viewModel.userMovement(direction: .down)
+            } label: {
+                Image("dPadButton")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100)
+                    .rotationEffect(.degrees(-270))
+            }
         }
     }
 }
